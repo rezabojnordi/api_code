@@ -1,0 +1,15 @@
+---
+
+- name: Tunning Linux
+  template:
+    src: sysctl.conf.j2
+    dest: /etc/sysctl.conf
+    mode: '0644'
+  tags:
+    - tune
+
+
+- name: Download and install Docker
+  command: sysctl -p
+  tags:
+    - tune
