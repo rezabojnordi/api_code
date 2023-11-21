@@ -1,0 +1,6 @@
+---
+- hosts: "all"
+  tasks:
+    - name: Deploy Application
+      import_role:
+        name: blue_green

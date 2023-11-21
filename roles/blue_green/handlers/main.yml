@@ -1,0 +1,6 @@
+---
+# handlers file for victoria
+- name: Reload NGINX
+  systemd:
+    name: nginx
+    state: restarted

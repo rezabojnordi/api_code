@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  fastapi-app-blue:
+    image: "{{docker_image}}:{{old_app_version}}"
+    container_name: myfastapiapp-blue
+    ports:
+      - "{{old_app_port}}:80"
+    environment:
+      - ENV_VAR_NAME=value
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

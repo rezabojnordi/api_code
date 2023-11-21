@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  fastapi-app-blue:
+    image: rezabojnordi/fastapi-app:v1.1
+    container_name: myfastapiapp-blue
+    ports:
+      - "8081:80"
+    environment:
+      - ENV_VAR_NAME=value
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

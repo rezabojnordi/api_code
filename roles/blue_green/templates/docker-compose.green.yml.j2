@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  fastapi-app-green:
+    image: rezabojnordi/fastapi-app:{{new_app_version}}
+    container_name: myfastapiapp-green
+    ports:
+      - "{{new_app_port}}:80"
+    environment:
+      - ENV_VAR_NAME=value
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
