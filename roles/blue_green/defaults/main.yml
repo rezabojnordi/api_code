@@ -1,0 +1,14 @@
+---
+# defaults file for blue_green
+
+nginx_listener: "80"
+
+####### Docker config ########
+docker_compose_version: "v2.23.1"
+old_app_version: "v1.0"
+old_app_port: "8081"
+
+docker_image: "rezabojnordi/fastapi-app"
+
+new_app_version: "v1.0"
+new_app_port: "8082"

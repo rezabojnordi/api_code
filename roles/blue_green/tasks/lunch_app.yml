@@ -1,0 +1,42 @@
+---
+
+- name: Create NGINX configuration
+  template:
+    src: nginx_template.conf.j2
+    dest: /etc/nginx/sites-available/app
+  notify: Reload NGINX
+  tags:
+    - lunch
+
+- name: Create symlink
+  command: ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
+  args:
+    creates: /etc/nginx/sites-enabled/app
+  notify: Reload NGINX
+  tags:
+    - lunch
+
+- name: Check NGINX configuration syntax
+  command: nginx -t
+  register: nginx_syntax
+  tags:
+    - lunch
+
+- name: Reload NGINX if syntax is okay
+  command: systemctl reload nginx
+  when: nginx_syntax.rc == 0
+  tags:
+    - lunch
+
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.blue.yml.j2
+    dest: ~/docker-compose.blue.yml
+    mode: '0644'
+  tags:
+    - lunch
+
+- name: Running docker-compose
+  command: "docker-compose -f ~/docker-compose.blue.yml up -d"
+  tags:
+    - lunch

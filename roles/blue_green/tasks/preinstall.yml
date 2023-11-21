@@ -1,0 +1,52 @@
+---
+- name: Download and install Docker
+  command: curl -fsSL https://get.docker.com -o install-docker.sh
+  args:
+    chdir: ~/  # Change the working directory for this task
+  tags: preinstall
+
+
+- name: Installing docker
+  command: sh install-docker.sh
+  args:
+    chdir: ~/  # Change the working directory for this task
+  tags: preinstall
+
+- name: Download and install Docker Compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-linux-x86_64"
+    dest: "/usr/local/bin/docker-compose"
+    mode: '0755'
+  tags: preinstall
+
+
+- name: Create symbolic link for Docker Compose
+  file:
+    src: "/usr/local/bin/docker-compose"
+    dest: "/usr/bin/docker-compose"
+    state: link
+  tags: preinstall
+
+- name: Make Docker Compose executable
+  file:
+    path: "/usr/local/bin/docker-compose"
+    mode: '0755'
+    tags: preinstall
+
+- name: Update apt package cache
+  apt:
+    update_cache: yes
+  tags: preinstall
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+  tags: preinstall
+
+- name: Start Nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: yes  # Auto-start Nginx on system boot
+  tags: preinstall
