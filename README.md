@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # weather Application
 
 This project helps you to see the weather condition of Istanbul city
@@ -56,6 +55,3 @@ if you want to know how to use Api plsease open below Url on your browser
 ```
 http://{ServerAddress}/docs
 ```
-=======
-# api_code
->>>>>>> 503496d29b5f3d42aa6a390ef1e25b2bf8e7e209

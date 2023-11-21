@@ -1,0 +1,6 @@
+server {
+    listen {{nginx_listener}};
+    location / {
+        proxy_pass http://localhost:{{old_app_port}};
+    }
+}
