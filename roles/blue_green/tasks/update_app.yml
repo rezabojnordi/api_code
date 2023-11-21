@@ -1,0 +1,70 @@
+---
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.green.yml.j2
+    dest: ~/docker-compose.green.yml
+    mode: '0644'
+  tags:
+    - update
+
+
+- name: Running docker-compose
+  command: "docker-compose -f ~/docker-compose.green.yml up -d"
+  tags:
+    - update
+
+
+- name: Perform HTTP health check
+  uri:
+    url: "http://{{ ansible_host }}:{{new_app_port}}/docs"  # Replace with the actual health check endpoint
+    method: GET
+    return_content: no
+  register: http_health_check_result
+  tags:
+    - update
+
+- name: Display HTTP health check result
+  debug:
+    var: http_health_check_result
+  tags:
+    - update
+
+- name: copy last file
+  command: "cp /etc/nginx/sites-available/app /etc/nginx/sites-available/app2"
+  tags:
+    - update
+  when: http_health_check_result.status == 200
+
+- name: Create NGINX configuration
+  template:
+    src: nginx_template.conf_new.conf.j2
+    dest: /etc/nginx/sites-available/app
+  notify: Reload NGINX
+  tags:
+    - update
+  when: http_health_check_result.status == 200
+
+
+- name: Create symlink
+  command: ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/
+  args:
+    creates: /etc/nginx/sites-enabled/
+  notify: Reload NGINX
+  tags:
+    - update
+  when: http_health_check_result.status == 200
+
+- name: Check NGINX configuration syntax
+  command: nginx -t
+  register: nginx_syntax
+  tags:
+    - update
+  when: http_health_check_result.status == 200
+
+- name: Reload NGINX if syntax is okay
+  command: systemctl reload nginx
+  when: nginx_syntax.rc == 0
+  tags:
+    - update
+  when: http_health_check_result.status == 200
+

@@ -1,6 +1,11 @@
+upstream my_upstream {
+    server localhost:{{old_app_port}};  # Replace 8081 with the correct port
+}
+
+
 server {
     listen {{nginx_listener}};
     location / {
-        proxy_pass http://localhost:{{old_app_port}};
+        proxy_pass http://my_upstream;
     }
 }

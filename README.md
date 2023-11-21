@@ -21,15 +21,13 @@ What things you need to install the software and how to install them:
 
 ### Requirements for deploying this application
 
-* installing Docker and Docker-compose on your server
+* pre configure
 
 ```bash
-curl -fsSL https://get.docker.com -o install-docker.sh
-sudo sh install-docker.sh
-
-curl -SL https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+   # Generate SSH key
+   ssh-keygen
+   # Copy SSH key to servers
+   ssh-copy-id your serverip
 ```
 * you must install Ansible on your deploy or your client
 
@@ -84,7 +82,7 @@ ansible-playbook -i inventory --tag preinstall run.yaml
 #### Launching the Application
 After completing the pre-installation tasks, use the following Ansible command to launch the web application:
 
-```
+``` bash
 ansible-playbook -i inventory --tag lunch run.yaml
 
 ```
