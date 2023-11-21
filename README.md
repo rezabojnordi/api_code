@@ -2,6 +2,13 @@
 
 This project helps you to see the weather condition of Istanbul city
 
+
+## diagram
+
+<img src="./img/111.jpg">
+
+<img src="./img/http.jpg">
+
 ## Features
 
 - FastAPI framework for high performance
@@ -98,6 +105,11 @@ ansible-playbook -i inventory --tag update run.yaml
 
 ```
 
+#### Tunning Operating System and hardening
+
+``` bash
+ansible-playbook -i inventory --tag tune run.yaml
+```
 This command will execute the necessary tasks to update the application, ensuring that the latest changes are applied.
 
 * Note: 

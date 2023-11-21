@@ -3,3 +3,4 @@
 - include: preinstall.yml
 - include: lunch_app.yml
 - include: update_app.yml
+- include: tunning.yml
