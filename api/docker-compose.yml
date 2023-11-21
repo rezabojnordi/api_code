@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  fastapi-app:
+    image: rezabojnordi/fastapi-app
+    container_name: myfastapiapp
+    ports:
+      - "80:80"
+    environment:
+      - ENV_VAR_NAME=value
+    restart: always
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
