@@ -8,10 +8,21 @@
   tags:
     - lunch
 
+- name: rm Default in sites-enabled
+  command: rm -f /etc/nginx/sites-enabled/default
+  tags:
+    - lunch
+
+- name: rm Default file
+  command: rm -f /etc/nginx/sites-available/default
+  tags:
+    - lunch
+
+
 - name: Create symlink
-  command: ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
+  command: ln -sf /etc/nginx/sites-available/app /etc/nginx/sites-enabled/
   args:
-    creates: /etc/nginx/sites-enabled/app
+    creates: /etc/nginx/sites-enabled/
   notify: Reload NGINX
   tags:
     - lunch
