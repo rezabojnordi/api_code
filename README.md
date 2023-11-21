@@ -24,6 +24,7 @@ What things you need to install the software and how to install them:
 * installing Docker and Docker-compose on your server
 
 ```bash
+
 curl -fsSL https://get.docker.com -o install-docker.sh
 sudo sh install-docker.sh
 
