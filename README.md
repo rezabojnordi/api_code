@@ -9,6 +9,8 @@ This project helps you to see the weather condition of Istanbul city
 
 <img src="./img/http.jpg">
 
+<img src="./img/webapp.jpg">
+
 ## Features
 
 - FastAPI framework for high performance
