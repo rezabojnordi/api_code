@@ -10,5 +10,5 @@ old_app_port: "8081"
 
 docker_image: "rezabojnordi/fastapi-app"
 
-new_app_version: "v1.0"
+new_app_version: "v1.2"
 new_app_port: "8082"

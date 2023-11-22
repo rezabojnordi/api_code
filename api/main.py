@@ -3,7 +3,7 @@ import requests
 
 app = FastAPI()
 
-@app.get("/get_weather")
+@app.get("/")
 async def get_weather():
     url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/istanbul?unitGroup=metric&key=NHF74VS7S9SWWZ46MY47A555E&contentType=json"
     response = requests.get(url)
